@@ -13,163 +13,177 @@ namespace ArraysEhFuncoes.ConsoleApp
 {
     internal class Program
     {
-        static void Main(string[] args)
+        static int ObterNumeroParaRemover()
         {
-            int[] sequenciaNumeros = new int[]
+            Console.WriteLine();
+
+            Console.Write("Digite o número para remover: ");
+
+            int numeroParaRemover = Convert.ToInt32(Console.ReadLine());
+
+            return numeroParaRemover;
+        }
+
+        static int[] ObterNumeros()
+        {
+            int[] numeros = new int[]
             {
                 -5, 3, 4, 5, 9, 6, 10, -2, 11, 1, 2, 6, 7, 8, 0, -6
             };
 
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
-            {
-                Console.Write(sequenciaNumeros[i]);
+            return numeros;
+        }
 
-                if (i != sequenciaNumeros.Length - 1) //
+        static void MostrarSequenciaNumeros(int[] numeros)
+        {
+            for (int i = 0; i < numeros.Length; i++)
+            {
+                Console.Write(numeros[i]);
+
+                if (i != numeros.Length - 1)
                     Console.Write(", ");
             }
+        }
 
-            //Encontrar maior valor
-            int maiorValor = sequenciaNumeros[0];
+        static int EncontrarMaiorValor(int[] numeros)
+        {
+            int maiorValor = numeros[0];
 
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
+            for (int i = 0; i < numeros.Length; i++)
             {
-                if (sequenciaNumeros[i] > maiorValor)
+                if (numeros[i] > maiorValor)
                 {
-                    maiorValor = sequenciaNumeros[i];
+                    maiorValor = numeros[i];
                 }
             }
 
-            Console.WriteLine();
+            return maiorValor;
+        }
 
-            Console.WriteLine("Maior Valor: " + maiorValor);
+        static int EncontrarMenorValor(int[] numeros)
+        {
+            int menorValor = numeros[0];
 
-            //Encontrar Menor Valor
-            int menorValor = sequenciaNumeros[0];
-
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
+            for (int i = 0; i < numeros.Length; i++)
             {
-                if (sequenciaNumeros[i] < menorValor)
+                if (numeros[i] < menorValor)
                 {
-                    menorValor = sequenciaNumeros[i];
+                    menorValor = numeros[i];
                 }
             }
 
-            Console.WriteLine();
+            return menorValor;
+        }
 
-            Console.WriteLine("Menor Valor: " + menorValor);
-
-            //Calcular o Valor Médio
-
+        static decimal CalcularValorMedio(int[] numeros)
+        {
             int valorTotal = 0;
 
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
+            for (int i = 0; i < numeros.Length; i++)
             {
-                valorTotal = valorTotal + sequenciaNumeros[i];
+                valorTotal = valorTotal + numeros[i];
             }
 
-            decimal valorMedio = valorTotal / sequenciaNumeros.Length; //16
+            decimal valorMedio = valorTotal / numeros.Length; //16
 
-            Console.WriteLine();
+            return Math.Round(valorMedio, 2);
+        }
 
-            Console.WriteLine("Valor Médio: " + valorMedio);
+        static int[] EncontrarTresMaiores(int[] numeros)
+        {
+            Array.Sort(numeros);
 
-            //Encontrar os 3 maiores
-
-            Array.Sort(sequenciaNumeros);
-
-            Array.Reverse(sequenciaNumeros);
+            Array.Reverse(numeros);
 
             int[] tresMaiores = new int[3];
 
             for (int i = 0; i < tresMaiores.Length; i++)
             {
-                tresMaiores[i] = sequenciaNumeros[i];
+                tresMaiores[i] = numeros[i];
             }
 
-            Console.WriteLine();
+            return tresMaiores;
+        }
 
-            Console.Write("Três Maiores: ");
-
-            for (int i = 0; i < tresMaiores.Length; i++)
-            {
-                Console.Write(tresMaiores[i]);
-
-                if (i != tresMaiores.Length - 1) //
-                    Console.Write(", ");
-            }
-
-            Console.WriteLine();
-
-            //Encontrar os valores negativos
-
-            Array.Reverse(sequenciaNumeros);
+        static int[] EncontrarValoresNegativos(int[] numeros)
+        {
+            Array.Reverse(numeros);
 
             int qtdNumerosNegativos = 0;
 
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
+            for (int i = 0; i < numeros.Length; i++)
             {
-                if (sequenciaNumeros[i] < 0)
+                if (numeros[i] < 0)
                     qtdNumerosNegativos++;
             }
 
             int[] valoresNegativos = new int[qtdNumerosNegativos]; //4
 
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
+            for (int i = 0; i < numeros.Length; i++)
             {
-                if (sequenciaNumeros[i] < 0)
+                if (numeros[i] < 0)
                 {
-                    valoresNegativos[i] = sequenciaNumeros[i];
+                    valoresNegativos[i] = numeros[i];
                 }
             }
 
-            Console.WriteLine();
+            return valoresNegativos;
+        }
 
-            Console.Write("Valores Negativos: ");
-
-            for (int i = 0; i < valoresNegativos.Length; i++)
-            {
-                Console.Write(valoresNegativos[i]);
-
-                if (i != valoresNegativos.Length - 1) //
-                    Console.Write(", ");
-            }
-
-            //Remover itens 
-            Console.WriteLine();
-            Console.Write("Digite o número para remover: ");
-            int numeroParaRemover = Convert.ToInt32(Console.ReadLine()); //6
-
+        static int[] RemoverElemento(int[] numeros, int numeroParaRemover)
+        {
             int qtdNumerosParaRemover = 0;
 
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
+            for (int i = 0; i < numeros.Length; i++)
             {
-                if (sequenciaNumeros[i] == numeroParaRemover)
+                if (numeros[i] == numeroParaRemover)
                 {
                     qtdNumerosParaRemover++;
                 }
             }
 
-            int[] novaSequenciaNumeros = new int[sequenciaNumeros.Length - qtdNumerosParaRemover];
+            int[] novaSequenciaNumeros = new int[numeros.Length - qtdNumerosParaRemover];
 
             int j = 0;
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
+            for (int i = 0; i < numeros.Length; i++)
             {
-                if (sequenciaNumeros[i] != numeroParaRemover)
+                if (numeros[i] != numeroParaRemover)
                 {
-                    novaSequenciaNumeros[j] = sequenciaNumeros[i];
+                    novaSequenciaNumeros[j] = numeros[i];
                     j++;
                 }
             }
 
-            for (int i = 0; i < novaSequenciaNumeros.Length; i++)
-            {
-                Console.Write(novaSequenciaNumeros[i]);
+            return novaSequenciaNumeros;
+        }
 
-                if (i != novaSequenciaNumeros.Length - 1) //
-                    Console.Write(", ");
-            }
+        static void Main(string[] args)
+        {
+            int[] sequenciaNumeros = ObterNumeros();
+
+            MostrarSequenciaNumeros(sequenciaNumeros);
+
+            Console.WriteLine("\nMaior Valor: " + EncontrarMaiorValor(sequenciaNumeros));
+
+            Console.WriteLine("\nMenor Valor: " + EncontrarMenorValor(sequenciaNumeros));
+
+            Console.WriteLine("\nValor Médio: " + CalcularValorMedio(sequenciaNumeros));
+
+            Console.Write("\nTrês Maiores: ");
+
+            MostrarSequenciaNumeros(EncontrarTresMaiores(sequenciaNumeros));
+
+            Console.Write("\nValores Negativos: ");
+
+            MostrarSequenciaNumeros(EncontrarValoresNegativos(sequenciaNumeros));
+
+            int numeroParaRemover = ObterNumeroParaRemover();
+
+            int[] novaSequenciaNumeros = RemoverElemento(sequenciaNumeros, numeroParaRemover);
+
+            MostrarSequenciaNumeros(novaSequenciaNumeros);
 
             Console.ReadLine();
-        }
+        }       
     }
 }
