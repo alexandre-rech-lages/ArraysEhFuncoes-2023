@@ -11,12 +11,10 @@
 namespace ArraysEhFuncoes.ConsoleApp
 {
     internal class Program
-    {       
+    {
         static void Main(string[] args)
         {
             int[] sequenciaNumeros = ObterNumeros();
-
-            MostrarSequenciaNumeros(sequenciaNumeros);
 
             Console.WriteLine("\nMaior Valor: " + EncontrarMaiorValor(sequenciaNumeros));
 
@@ -36,6 +34,8 @@ namespace ArraysEhFuncoes.ConsoleApp
 
             int[] novaSequenciaNumeros = RemoverElemento(sequenciaNumeros, numeroParaRemover);
 
+            Console.WriteLine();
+
             MostrarSequenciaNumeros(novaSequenciaNumeros);
 
             Console.ReadLine();
@@ -43,7 +43,6 @@ namespace ArraysEhFuncoes.ConsoleApp
 
         static int ObterNumeroParaRemover()
         {
-
             Console.WriteLine();
 
             Console.Write("Digite o número para remover: ");
@@ -55,16 +54,23 @@ namespace ArraysEhFuncoes.ConsoleApp
 
         static int[] ObterNumeros()
         {
-            int[] numeros = new int[]
+            Console.Write("Digite os números separados por espaços: ");
+
+            string[] sequenciaNumeros = Console.ReadLine().Trim().Split(" ");
+
+            int[] numeros = new int[sequenciaNumeros.Length];
+
+            for (int i = 0; i < sequenciaNumeros.Length; i++)
             {
-                -5, 3, 4, 5, 9, 6, 10, -2, 11, 1, 2, 6, 7, 8, 0, -6
-            };
+                numeros[i] = Convert.ToInt32(sequenciaNumeros[i]);
+            }
 
             return numeros;
         }
 
         static void MostrarSequenciaNumeros(int[] numeros)
         {
+
             for (int i = 0; i < numeros.Length; i++)
             {
                 Console.Write(numeros[i]);
@@ -72,6 +78,8 @@ namespace ArraysEhFuncoes.ConsoleApp
                 if (i != numeros.Length - 1)
                     Console.Write(", ");
             }
+
+            Console.WriteLine();
         }
 
         static int EncontrarMaiorValor(int[] numeros)
