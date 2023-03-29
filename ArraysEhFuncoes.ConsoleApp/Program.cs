@@ -1,20 +1,49 @@
 ﻿/**
- * 
- *  Encontrar o Maior Valor da sequência [x]
-    Encontrar o Menor Valor da sequência [x]
-    Encontrar o Valor Médio da sequência [x]
-    Encontrar os 3 maiores valores da sequência [x]
-    Encontrar os valores negativos da sequência [x]    
-    Remover itens da sequência []
-    Mostrar na Tela os valores da sequência [x]
+*  Encontrar o Maior Valor da sequência [x]
+*  Encontrar o Menor Valor da sequência [x]
+*  Encontrar o Valor Médio da sequência [x]
+*  Encontrar os 3 maiores valores da sequência [x]
+*  Encontrar os valores negativos da sequência [x]    
+*  Remover itens da sequência [x]
+*  Mostrar na Tela os valores da sequência [x]
+*/
 
- */
 namespace ArraysEhFuncoes.ConsoleApp
 {
     internal class Program
-    {
+    {       
+        static void Main(string[] args)
+        {
+            int[] sequenciaNumeros = ObterNumeros();
+
+            MostrarSequenciaNumeros(sequenciaNumeros);
+
+            Console.WriteLine("\nMaior Valor: " + EncontrarMaiorValor(sequenciaNumeros));
+
+            Console.WriteLine("\nMenor Valor: " + EncontrarMenorValor(sequenciaNumeros));
+
+            Console.WriteLine("\nValor Médio: " + CalcularValorMedio(sequenciaNumeros));
+
+            Console.Write("\nTrês Maiores: ");
+
+            MostrarSequenciaNumeros(EncontrarTresMaiores(sequenciaNumeros));
+
+            Console.Write("\nValores Negativos: ");
+
+            MostrarSequenciaNumeros(EncontrarValoresNegativos(sequenciaNumeros));
+
+            int numeroParaRemover = ObterNumeroParaRemover();
+
+            int[] novaSequenciaNumeros = RemoverElemento(sequenciaNumeros, numeroParaRemover);
+
+            MostrarSequenciaNumeros(novaSequenciaNumeros);
+
+            Console.ReadLine();
+        }
+
         static int ObterNumeroParaRemover()
         {
+
             Console.WriteLine();
 
             Console.Write("Digite o número para remover: ");
@@ -156,34 +185,5 @@ namespace ArraysEhFuncoes.ConsoleApp
 
             return novaSequenciaNumeros;
         }
-
-        static void Main(string[] args)
-        {
-            int[] sequenciaNumeros = ObterNumeros();
-
-            MostrarSequenciaNumeros(sequenciaNumeros);
-
-            Console.WriteLine("\nMaior Valor: " + EncontrarMaiorValor(sequenciaNumeros));
-
-            Console.WriteLine("\nMenor Valor: " + EncontrarMenorValor(sequenciaNumeros));
-
-            Console.WriteLine("\nValor Médio: " + CalcularValorMedio(sequenciaNumeros));
-
-            Console.Write("\nTrês Maiores: ");
-
-            MostrarSequenciaNumeros(EncontrarTresMaiores(sequenciaNumeros));
-
-            Console.Write("\nValores Negativos: ");
-
-            MostrarSequenciaNumeros(EncontrarValoresNegativos(sequenciaNumeros));
-
-            int numeroParaRemover = ObterNumeroParaRemover();
-
-            int[] novaSequenciaNumeros = RemoverElemento(sequenciaNumeros, numeroParaRemover);
-
-            MostrarSequenciaNumeros(novaSequenciaNumeros);
-
-            Console.ReadLine();
-        }       
     }
 }
