@@ -8,13 +8,61 @@
 *  Mostrar na Tela os valores da sequência [x]
 */
 
+using System.Collections;
+
 namespace ArraysEhFuncoes.ConsoleApp
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            int[] sequenciaNumeros = ObterNumeros();
+            /** Exemplos ArrayList
+             * 
+            //Console.WriteLine("Digite um nome: ");
+
+            ArrayList listaDeNomes = new ArrayList();
+
+            //listaDeNomes.Add(Console.ReadLine());
+
+            listaDeNomes.Add("Gabriel");
+            listaDeNomes.Add("Tiago");
+            listaDeNomes.Add("Camila");            
+
+            foreach (string nome in listaDeNomes)
+            {
+                Console.WriteLine(nome);
+            }
+
+            listaDeNomes.Remove("Camila");
+
+            Console.WriteLine( "Sem a Camila" );
+
+            foreach (string nome in listaDeNomes)
+            {
+                Console.WriteLine(nome);
+            }
+
+            ArrayList listaDeNumeros = new ArrayList();
+
+            listaDeNumeros.Add(10);
+            listaDeNumeros.Add(20);
+            listaDeNumeros.Add(30);
+            listaDeNumeros.Add(40);
+
+            listaDeNumeros.Add(50);
+
+            int posicaoDoNumero50 = listaDeNumeros.IndexOf(50);
+           
+            Console.WriteLine("Mostrando números com foreach");
+
+            for (int i = 0; i < listaDeNumeros.Count; i++)
+            {
+                Console.WriteLine(listaDeNumeros[i]);
+            }
+
+            */
+            
+            ArrayList sequenciaNumeros = ObterNumeros();
 
             Console.WriteLine("\nMaior Valor: " + EncontrarMaiorValor(sequenciaNumeros));
 
@@ -32,13 +80,13 @@ namespace ArraysEhFuncoes.ConsoleApp
 
             int numeroParaRemover = ObterNumeroParaRemover();
 
-            int[] novaSequenciaNumeros = RemoverElemento(sequenciaNumeros, numeroParaRemover);
+            ArrayList novaSequenciaNumeros = RemoverElemento(sequenciaNumeros, numeroParaRemover);
 
             Console.WriteLine();
 
             MostrarSequenciaNumeros(novaSequenciaNumeros);
 
-            Console.ReadLine();
+            Console.ReadLine();            
         }
 
         static int ObterNumeroParaRemover()
@@ -52,146 +100,113 @@ namespace ArraysEhFuncoes.ConsoleApp
             return numeroParaRemover;
         }
 
-        static int[] ObterNumeros()
+        static ArrayList ObterNumeros()
         {
             Console.Write("Digite os números separados por espaços: ");
 
             string[] sequenciaNumeros = Console.ReadLine().Trim().Split(" ");
+            
+            ArrayList numeros = new ArrayList();
 
-            int[] numeros = new int[sequenciaNumeros.Length];
-
-            for (int i = 0; i < sequenciaNumeros.Length; i++)
+            foreach (string numero in sequenciaNumeros)
             {
-                numeros[i] = Convert.ToInt32(sequenciaNumeros[i]);
-            }
+                numeros.Add(Convert.ToInt32(numero));
+            }          
 
             return numeros;
         }
 
-        static void MostrarSequenciaNumeros(int[] numeros)
+        static void MostrarSequenciaNumeros(ArrayList numeros)
         {
-
-            for (int i = 0; i < numeros.Length; i++)
+            for (int i = 0; i < numeros.Count; i++)
             {
                 Console.Write(numeros[i]);
 
-                if (i != numeros.Length - 1)
+                if (i != numeros.Count - 1)
                     Console.Write(", ");
             }
 
             Console.WriteLine();
         }
 
-        static int EncontrarMaiorValor(int[] numeros)
+        static int EncontrarMaiorValor(ArrayList numeros)
         {
-            int maiorValor = numeros[0];
+            int maiorValor = (int)numeros[0];
 
-            for (int i = 0; i < numeros.Length; i++)
+            foreach (int numero in numeros)
             {
-                if (numeros[i] > maiorValor)
+                if (numero > maiorValor)
                 {
-                    maiorValor = numeros[i];
+                    maiorValor = numero;
                 }
-            }
+            }           
 
             return maiorValor;
         }
 
-        static int EncontrarMenorValor(int[] numeros)
+        static int EncontrarMenorValor(ArrayList numeros)
         {
-            int menorValor = numeros[0];
+            int menorValor = (int)numeros[0];
 
-            for (int i = 0; i < numeros.Length; i++)
+            foreach (int numero in numeros)
             {
-                if (numeros[i] < menorValor)
+                if (numero < menorValor)
                 {
-                    menorValor = numeros[i];
+                    menorValor = numero;
                 }
             }
 
             return menorValor;
         }
 
-        static decimal CalcularValorMedio(int[] numeros)
+        static decimal CalcularValorMedio(ArrayList numeros)
         {
             int valorTotal = 0;
 
-            for (int i = 0; i < numeros.Length; i++)
+            foreach (int numero in numeros)
             {
-                valorTotal = valorTotal + numeros[i];
+                valorTotal = valorTotal + numero;
             }
 
-            decimal valorMedio = valorTotal / numeros.Length; //16
+            decimal valorMedio = valorTotal / numeros.Count; //16
 
             return Math.Round(valorMedio, 2);
         }
 
-        static int[] EncontrarTresMaiores(int[] numeros)
+        static ArrayList EncontrarTresMaiores(ArrayList numeros)
         {
-            Array.Sort(numeros);
+            numeros.Sort();
 
-            Array.Reverse(numeros);
+            numeros.Reverse();
 
-            int[] tresMaiores = new int[3];
-
-            for (int i = 0; i < tresMaiores.Length; i++)
-            {
-                tresMaiores[i] = numeros[i];
-            }
-
-            return tresMaiores;
+            return numeros.GetRange(0, 3);
         }
 
-        static int[] EncontrarValoresNegativos(int[] numeros)
+        static ArrayList EncontrarValoresNegativos(ArrayList numeros)
         {
-            Array.Reverse(numeros);
+            numeros.Reverse();
 
-            int qtdNumerosNegativos = 0;
+            ArrayList valoresNegativos = new ArrayList();
 
-            for (int i = 0; i < numeros.Length; i++)
+            foreach (int numero in numeros)
             {
-                if (numeros[i] < 0)
-                    qtdNumerosNegativos++;
-            }
-
-            int[] valoresNegativos = new int[qtdNumerosNegativos]; //4
-
-            for (int i = 0; i < numeros.Length; i++)
-            {
-                if (numeros[i] < 0)
+                if (numero < 0)
                 {
-                    valoresNegativos[i] = numeros[i];
+                    valoresNegativos.Add(numero);
                 }
             }
 
             return valoresNegativos;
         }
 
-        static int[] RemoverElemento(int[] numeros, int numeroParaRemover)
+        static ArrayList RemoverElemento(ArrayList numeros, int numeroParaRemover)
         {
-            int qtdNumerosParaRemover = 0;
-
-            for (int i = 0; i < numeros.Length; i++)
+            while (numeros.Contains(numeroParaRemover))
             {
-                if (numeros[i] == numeroParaRemover)
-                {
-                    qtdNumerosParaRemover++;
-                }
+                numeros.Remove(numeroParaRemover);
             }
 
-            int[] novaSequenciaNumeros = new int[numeros.Length - qtdNumerosParaRemover];
-
-            int j = 0;
-            for (int i = 0; i < numeros.Length; i++)
-            {
-                if (numeros[i] != numeroParaRemover)
-                {
-                    novaSequenciaNumeros[j] = numeros[i];
-                    j++;
-                }
-            }
-
-            return novaSequenciaNumeros;
+            return numeros;
         }
     }
 }
